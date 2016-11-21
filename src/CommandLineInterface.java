@@ -19,6 +19,8 @@ public class CommandLineInterface {
             case "search":
                 reg.searchContact(inputArray[1]);
                 break;
+            case "save" : reg.saveList();
+                break;
             case "exit":
                 flipSwitch();
                 break;
@@ -40,6 +42,11 @@ public class CommandLineInterface {
         while (run) {
             input = readUserInput();
             inputSplit = input.split(" ");
+            while ((inputSplit[0].toLowerCase().equals("add") && inputSplit.length < 4)
+                    || (inputSplit[0].toLowerCase().equals("search") && inputSplit.length < 2)) {
+                input = readUserInput();
+                inputSplit = input.split(" ");
+            }
             commandReader(inputSplit);
         }
         reg.saveList();
